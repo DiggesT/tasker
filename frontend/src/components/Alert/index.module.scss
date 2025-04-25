@@ -1,0 +1,22 @@
+@import '../../styles/vars';
+@import '../../styles/mixins';
+
+.alert {
+  padding: 10px;
+  border-radius: $borderRadiusSmall;
+
+  &.red {
+    background-color: $bittersweetShimmer;
+    color: $white;
+  }
+
+  &.green {
+    background-color: $yellowGreen;
+    color: $white;
+  }
+
+  &.brown {
+    background-color: $parchment;
+    color: $black;
+  }
+}

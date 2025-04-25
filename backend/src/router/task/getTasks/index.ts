@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { trpc } from "../../../lib/trpc";
-import { zGetMembersTrpcInput } from "./input";
+import { zGetTasksTrpcInput } from "./input";
 
 export const getTasksTrpcRoute = trpc.procedure
   .input(
-    zGetMembersTrpcInput.extend({
+    zGetTasksTrpcInput.extend({
       orderCreatedAt: z.enum(["asc", "desc"]).optional().default("asc"),
     }),
   )
@@ -28,8 +28,8 @@ export const getTasksTrpcRoute = trpc.procedure
       take: input.limit + 1,
     });
 
-    const nextMember = tasks.at(input.limit);
-    const nextCursor = nextMember?.serialNumber;
+    const nextTask = tasks.at(input.limit);
+    const nextCursor = nextTask?.serialNumber;
 
-    return { members: tasks.slice(0, input.limit), nextCursor };
+    return { tasks: tasks.slice(0, input.limit), nextCursor };
   });

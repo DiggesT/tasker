@@ -1,0 +1,61 @@
+@use 'sass:color';
+@import '../../styles/vars';
+@import '../../styles/mixins';
+
+.button {
+  padding: 8px 15px;
+  color: $white;
+  background-color: $asparagus;
+  border: none;
+  font-weight: bold;
+  border-radius: $borderRadiusSmall;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+
+  &.color-green {
+    background-color: $asparagus;
+
+    &:hover {
+      background-color: $hunterGreen;
+    }
+
+    &:active {
+      background-color: $yellowGreen;
+    }
+  }
+
+  &.color-red {
+    background-color: $bittersweetShimmer;
+
+    &:hover {
+      background-color: color.scale($bittersweetShimmer, $lightness: 10%);
+    }
+
+    &:active {
+      background-color: color.scale($bittersweetShimmer, $lightness: 30%);
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    background-color: #929292;
+    color: #d9d9d9;
+  }
+
+  &.loading {
+    @include loader($borderWidth: 3px, $size: 20px, $color: $white);
+
+    .text {
+      opacity: 0;
+    }
+  }
+}
+
+.buttons {
+  margin-right: -5px;
+
+  & > * {
+    margin-right: 5px;
+  }
+}

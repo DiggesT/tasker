@@ -4,25 +4,25 @@ import { type Express } from "express";
 import superjson from "superjson";
 import { expressHandler } from "trpc-playground/handlers/express";
 import { type TrpcRouter } from "../router";
-import { type ExpressRequest } from "../utils/types";
+// import { type ExpressRequest } from "../utils/types";
 import { type AppContext } from "./ctx";
 import { ExpectedError } from "./error";
 
 export const getTrpcContext = ({
   appContext,
-  req,
+  // req,
 }: {
   appContext: AppContext;
-  req: ExpressRequest;
+  // req: ExpressRequest;
 }) => ({
   ...appContext,
-  me: req.user || null,
+  // me: req.user || null,
 });
 
 const getCreateTrpcContext =
   (appContext: AppContext) =>
   ({ req }: trpcExpress.CreateExpressContextOptions) =>
-    getTrpcContext({ appContext, req: req as ExpressRequest });
+    getTrpcContext({ appContext });
 
 type TrpcContext = inferAsyncReturnType<
   ReturnType<typeof getCreateTrpcContext>
@@ -47,14 +47,14 @@ export const createTrpcRouter = trpc.router;
 export const applyTrpcToExpressApp = async (
   expressApp: Express,
   appContext: AppContext,
-  trpcRouter: TrpcRouter,
+  trpcRouter: TrpcRouter
 ) => {
   expressApp.use(
     "/trpc",
     trpcExpress.createExpressMiddleware({
       router: trpcRouter,
       createContext: getCreateTrpcContext(appContext),
-    }),
+    })
   );
 
   expressApp.use(
@@ -66,6 +66,6 @@ export const applyTrpcToExpressApp = async (
       request: {
         superjson: true,
       },
-    }),
+    })
   );
 };

@@ -14,13 +14,13 @@ export const Layout = () => {
         </div>
         <ul className={css.menu}>
           <li className={css.item}>
-            <Link className={css.link} to={routes.allTasksRoute}>
-              All Tasks
+            <Link className={css.link} to={routes.newTasksRoute}>
+              Add Task
             </Link>
           </li>
           <li className={css.item}>
-            <Link className={css.link} to={routes.newTasksRoute}>
-              Add Task
+            <Link className={css.link} to={routes.allTasksRoute}>
+              All Tasks
             </Link>
           </li>
         </ul>
