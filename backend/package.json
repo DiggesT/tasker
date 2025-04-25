@@ -1,0 +1,32 @@
+{
+  "name": "@tasker/backend",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development ts-node-dev --watch ./.env --rs --exit-child ./src/index.ts",
+    "build-ts": "rimraf ./dist && tsc --build ./tsconfig.build.json",
+    "build": "pnpm build-ts",
+    "start": "cross-env NODE_ENV=production node ./dist/backend/src/index.js",
+    "pmd": "prisma migrate dev",
+    "pgc": "prisma generate",
+    "types": "tsc --noEmit --project ./tsconfig.json",
+    "prettify": "prettier --log-level warn --cache --write '{src/**/*,*}.{ts,tsx,js,json,yml,scss}' '!**/{node_modules,dist}/**/*'"
+  },
+  "prisma": {
+    "schema": "./src/prisma/schema.prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "6.6.0",
+    "@trpc/server": "^10.45.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "prisma": "^6.6.0",
+    "superjson": "1.x",
+    "trpc-playground": "^1.0.4",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1"
+  }
+}
